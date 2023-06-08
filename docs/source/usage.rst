@@ -395,6 +395,32 @@ The program ``wgd focus`` can handle various analysis. To recover the phylogeny,
 
 What this step does is 1) write sequence for each gene family, 2) infer multiple sequence alignment (MSA) for each gene family, if with concatenation method, 3) concatenate all MSA and infer the maximum likelihood gene tree as species tree, if with coalescence method 3) infer maximum likelihood gene tree for each gene family and summarize the species tree using ASTRAL. The influential parameters include the ``tree_method`` parameter controling the program to infer gene tree and the ``treeset`` parameter to control the parameter setting for gene tree inference.
 
+.. _annotation:
+
+Functional annotation of gene families
+------------
+
+The functional annotation of gene families can also be achieved in ``wgd focue`` using the command below.
+
+.. code-block:: console
+
+   (ENV) $ wgd focus families *cds.fasta --annotation eggnog --eggnogdata eddata --dmnb dbdata
+
+This step relies on the database provided by users. It's required to pre-set the executable of annotation program for instance, ``eggnog``, ``hmmer`` and ``interproscan`` in the environment variable. The influential parameter is the ``evalue`` that controls the e-value cut-off for annotation.
+
+.. _dating:
+
+WGD dating
+------------
+
+The program ``wgd focus`` is the final step in WGD dating. After obtaining the anchor pairs-merged orthogroups from ``wgd dmd``, the phylogenetic dating can be conducted with the command below.
+
+.. code-block:: console
+
+   (ENV) $ wgd focus families sequence1 sequence2 sequence3 --dating mcmctree --speciestree species_tree.nw
+
+The command shown above is a simple example that calls the molecular dating program ``mcmctree`` to conduct the dating. A species tree is mandatory input. Further dating parameters can be provided with ``datingset`` parameters.
+
 .. py:function:: cli.focus(families, sequences, outdir, tmpdir, nthreads, to_stop, cds, strip_gaps, aligner, tree_method, treeset, concatenation, coalescence, speciestree, dating, datingset, nsites, outgroup, partition, aamodel, ks, annotation, pairwise, eggnogdata, pfam, dmnb, hmm, evalue, exepath, fossil, rootheight, chainset, beastlgjar, beagle, protdating)
 
    Concatenation-/Coalescence-based phylogenetic inference
@@ -472,22 +498,3 @@ What this step does is 1) write sequence for each gene family, 2) infer multiple
    :param protdating: Whether to only initiate the protein-concatenation based dating analysis, default False.
    :type protdating: boolean flag
 
-
-Creating recipes
-----------------
-
-To retrieve a list of random ingredients,
-you can use the ``lumache.get_random_ingredients()`` function:
-
-
-.. autofunction:: lumache.get_random_ingredients
-
-The ``kind`` parameter should be either ``"meat"``, ``"fish"``,
-or ``"veggies"``. Otherwise, :py:func:`lumache.get_random_ingredients`
-will raise an exception.
-
-.. autoexception:: lumache.InvalidKindError
-
->>> import lumache
->>> lumache.get_random_ingredients()
-['shells', 'gorgonzola', 'parsley']
