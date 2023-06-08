@@ -1,9 +1,8 @@
-Template for the Read the Docs tutorial
+wgd v2 documentation
 =======================================
 
-This GitHub template includes fictional Python library
-with some basic Sphinx docs.
+This repository is to contain the Sphinx docs for the documentation of wgd v2.
 
-Read the tutorial here:
+Please read the documentation here:
 
-https://docs.readthedocs.io/en/stable/tutorial/
+https://wgdv2.readthedocs.io/en/latest/
