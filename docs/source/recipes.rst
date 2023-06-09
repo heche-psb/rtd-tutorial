@@ -198,3 +198,6 @@ The final WGD date is as shown below, whose posterior mean, median and mode are 
 
 .. image:: Ranunculales_WGD_date.svg
 
+The whole workflow can be simplified as below.
+
+.. image:: dating.drawio.svg
