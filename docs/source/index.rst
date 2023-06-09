@@ -9,7 +9,7 @@ wgd v2 documentation
 **wgd v2** is a Python package for the inference and timing of polyploidization (WGD) events. It suits those researchers who want to identify and date the WGD with a (few) genome. In this documentation, we provided the :doc:`theory`, comprehensive :doc:`usage` and multiple :doc:`recipes` for different needs. For the installation, Please refer to the :doc:`installation` page for detailed information of installing.
 
 Check out the :doc:`recipes` section for a quick start of examplar analysis such as
-:ref:`whole paranome <paranome>` inference, :ref:`WGD dating <dating>` and etc.
+:ref:`whole paranome inference <paranome>`, :ref:`WGD dating <datingrecipe>` and etc.
 
 .. note::
 
