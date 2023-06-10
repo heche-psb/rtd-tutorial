@@ -28,3 +28,4 @@ Contents
    installation
    usage
    recipes
+   citation

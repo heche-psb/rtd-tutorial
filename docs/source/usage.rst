@@ -153,7 +153,7 @@ After obtaining the paralogous/orthologous gene family file, the construction of
 
    (ENV) $ wgd ksd families *cds.fasta
 
-The gene family file is mandatory input, which can be acquired from the eariler steps using ``wgd dmd``. Depending on the number of species (or the provided cds sequence files), the meaning of constructed *K*\ :sub:`S` distribution differs. If only one species is given, the whole paranome *K*\ :sub:`S` distribution is to be established, which is a good material for the primary identification of WGDs. If orthogroups of multiple species are given, a paralog-ortholog mixed *K*\ :sub:`S` distribution is to be built that further subdivision per species pair of *K*\ :sub:`S` can be used in diagnosing the phylogenetic placement of focused WGD events. If the RBH gene family of two species is given, the constructed *K*\ :sub:`S` distribution is to show the *K*\ :sub:`S` age of divergence event, as illustrated in ``wgd v1``. This step is quite flexible in that various types of gene family files can be provided, for instance, the paralogous gene family, the orthogroup, the RBH gene family, the collinear orthologous gene family (inferred in the collinear coalescence inference analysis) and whatever gene families that users would like to calculate, as long as in the correct format (tab-separated table that each row represents a gene family while each column represents a species with the first column as the label of gene family and the first row as the label of species name). The influential parameters include the ``pairwise`` parameter determining whether to calculate the *K*\ :sub:`S` on the alignment basis of each paralogous gene pair instead of the whole alignment for that family, and the ``strip_gaps`` parameter controlling whether to drop all gaps in multiple sequence alignment, which only makes a difference when co-occurring with the ``pairwise`` parameter because the program ``codeml`` will strip all the gaps anyway.
+The gene family file is mandatory input, which can be acquired from the eariler steps using ``wgd dmd``. Depending on the number of species (or the provided cds sequence files), the meaning of constructed *K*\ :sub:`S` distribution differs. If only one species is given, the whole paranome *K*\ :sub:`S` distribution is to be established, which is a good material for the primary identification of WGDs. If orthogroups of multiple species are given, a paralog-ortholog mixed *K*\ :sub:`S` distribution is to be built that further subdivision per species pair of *K*\ :sub:`S` can be used in diagnosing the phylogenetic placement of focused WGD events. If the RBH gene family of two species is given, the constructed *K*\ :sub:`S` distribution is to show the *K*\ :sub:`S` age of divergence event, as illustrated in ``wgd v1``. This step is quite flexible in that various types of gene family files can be provided, for instance, the paralogous gene family, the orthogroup, the RBH gene family, the collinear orthologous gene family (inferred in the collinear coalescence inference analysis) and whatever gene families that users would like to calculate, as long as in the correct format (tab-separated table that each row represents a gene family while each column represents a species with the first column as the label of gene family and the first row as the label of species name). The influential parameters include the ``pairwise`` parameter determining whether to calculate the *K*\ :sub:`S` on the alignment basis of each paralogous gene pair instead of the whole alignment for that family, and the ``strip_gaps`` parameter controlling whether to drop all gaps in multiple sequence alignment, which only makes a difference when co-occurring with the ``pairwise`` parameter because the program ``codeml`` will strip all the gaps anyway. The default ``tree_method`` is the external software ``fasttree``, which can be replaced with the built-in ``cluster`` method.
 
 .. _correctedksdistributio:
 
@@ -179,7 +179,7 @@ This step is mainly affected by the parameter ``reweight`` determining whether t
    :type families: path
    :param sequences: Argument of sequence files.
    :type sequences: paths
-   :param outdir: Path of desired output directory, default "wgd_dmd".
+   :param outdir: Path of desired output directory, default "wgd_ksd".
    :type outdir: str
    :param tmpdir: Path of temporary directory.
    :type tmpdir: str or None
@@ -211,6 +211,8 @@ This step is mainly affected by the parameter ``reweight`` determining whether t
    :type plotkde: boolean flag
    :param plotapgmm: Whether to plot mixture modeling of anchor *K*\ :sub:`S` in the mixed *K*\ :sub:`S` distribution, default False.
    :type plotapgmm: boolean flag
+   :param plotelmm: Whether to plot elmm mixture modeling of paranome *K*\ :sub:`S` in the mixed *K*\ :sub:`S` distribution, default False.
+   :type plotelmm: boolean flag
    :param components: The range of the number of components to fit in anchor *K*\ :sub:`S` mixture modeling, default (1,4).
    :type components: (int,int)
 
@@ -243,7 +245,7 @@ This part of analysis is mainly relying on the mixture module of scikit-learn li
    :type components: (int,int)
    :param bins: The number of bins in *K*\ :sub:`S` distribution, default "50".
    :type bins: int
-   :param outdir: Path of desired output directory, default "wgd_dmd".
+   :param outdir: Path of desired output directory, default "wgd_mix".
    :type outdir: str
    :param gamma: The gamma parameter for bgmm models, default "0.001".
    :type gamma: float
@@ -275,7 +277,7 @@ The influential parameters for synteny inference include the ``minlen`` controli
    :type gff_files: paths
    :param ks_distribution: The *K*\ :sub:`S` distribution datafile, default None.
    :type ks_distribution: path or None
-   :param outdir: Path of desired output directory, default "wgd_dmd".
+   :param outdir: Path of desired output directory, default "wgd_syn".
    :type outdir: str
    :param feature: The feature for parsing gene IDs from GFF files, default "gene".
    :type feature: str
@@ -319,7 +321,7 @@ There are two methods which can be called in this step. One is the heuristic met
    :type anchorpoints: path or None
    :param segments: The segments datafile, default None.
    :type segments: path or None
-   :param outdir: Path of desired output directory, default "wgd_dmd".
+   :param outdir: Path of desired output directory, default "wgd_peak".
    :type outdir: str
    :param alignfilter: The cutoff for alignment identity, length and coverage, default (0.0, 0, 0.0).
    :type alignfilter: (float,int,float)
@@ -431,7 +433,7 @@ The command shown above is a simple example that calls the molecular dating prog
    :type families: path
    :param sequences: Argument of sequence files.
    :type sequences: paths
-   :param outdir: Path of desired output directory, default "wgd_dmd".
+   :param outdir: Path of desired output directory, default "wgd_focus".
    :type outdir: str
    :param tmpdir: Path of temporary directory.
    :type tmpdir: str or None
@@ -497,4 +499,93 @@ The command shown above is a simple example that calls the molecular dating prog
    :type beagle: boolean flag
    :param protdating: Whether to only initiate the protein-concatenation based dating analysis, default False.
    :type protdating: boolean flag
+
+.. _viz:
+
+*K*\ :sub:`S` distribution visualization
+------------
+
+The program ``wgd viz`` can be used in plotting *K*\ :sub:`S` distribution and synteny. To visualize the *K*\ :sub:`S` distribution, the command below can be used.
+
+.. code-block:: console
+
+   (ENV) $ wgd viz --data ks.tsv
+
+The program ``wgd viz`` will automately calculate and plot the exponential-lognormal mixture modeling (ELMM) result. The influential parameters include the ``em_iterations`` controling the maximum EM iterations and the ``em_initializations`` controling the the maximum EM initializations, the ``prominence_cutoff`` determining the prominence cutoff of acceptable peaks and the ``rel_height`` to set the relative height at which the peak width is measured.
+
+Corrected *K*\ :sub:`S` distribution visualization
+------------
+
+To add rate correction result into the *K*\ :sub:`S` plot, one can use the command below.
+
+.. code-block:: console
+
+   (ENV) $ wgd viz --data ks.tsv --spair speciespair1 --spair speciespair2 --speciestree speciestree.nw --gsmap gene_species.map
+
+The additional required file ``gene_species.map`` is automately produced from the ``wgd ksd`` step when producing the ``ks.tsv`` file.
+
+Synteny visualization
+------------
+
+The synteny plot produced by the program ``wgd syn`` can be reproduced by ``wgd viz`` too. The command is as below.
+
+.. code-block:: console
+
+   (ENV) $ wgd viz --anchorpoints apdata --segments smdata --multiplicon mtdata --genetable gtdata
+
+The influential parameters include the ``minlen`` controling the minimum length of a scaffold to be included in dotplot, the ``maxsize`` determining the maximum family size to include, the ``minseglen`` determining the minimum length of segments to include, the ``keepredun`` controling whether to keep redundant multiplicons.
+
+.. py:function:: cli.viz(datafile,spair,outdir,gsmap,plotkde,reweight,em_iterations,em_initializations,prominence_cutoff,segments,minlen,maxsize,anchorpoints,multiplicon,genetable,rel_height,speciestree,onlyrootout,minseglen,keepredun,extraparanomeks,plotapgmm,plotelmm,components)
+
+   *K*\ :sub:`S` distribution visualization
+   Synteny visualization
+
+   :param datafile: The path to datafile, default None.
+   :type datafile: path or None
+   :param spair: The species pair to be plotted, default None.
+   :type spair: multiple str options
+   :param outdir: Path of desired output directory, default "wgd_focus".
+   :type outdir: str
+   :param gsmap: The gene name-species name map, default None.
+   :type gsmap: path or None
+   :param plotkde: Whether to plot kde curve upon histogram, default False.
+   :type plotkde: boolean flag
+   :param reweight: Whether to recalculate the weight per species pair, default False.
+   :type reweight: boolean flag
+   :param em_iterations: The maximum EM iterations, default "200".
+   :type em_iterations: int
+   :param em_initializations: The maximum EM initializations, default "200".
+   :type em_initializations: int
+   :param prominence_cutoff: The prominence cutoff of acceptable peaks, default "0.1".
+   :type prominence_cutoff: float
+   :param segments: The segments data file, default None.
+   :type segments: path or None
+   :param minlen: The minimum length of a scaffold to be included in dotplot, if "-1" was set, the 10% of the longest scaffolds will be used, default "-1".
+   :type minlen: int
+   :param maxsize: The maximum family size to include, default "200".
+   :type maxsize: int
+   :param anchorpoints: The anchor points datafile, default None.
+   :type anchorpoints: path or None
+   :param multiplicon: The multiplicons datafile, default None.
+   :type multiplicon: path or None
+   :param genetable: The gene table datafile, default None.
+   :type genetable: path or None
+   :param rel_height: The relative height at which the peak width is measured, default "0.4".
+   :type rel_height: float
+   :param speciestree: The species tree to perform rate correction, default None.
+   :type speciestree: path or None
+   :param onlyrootout: Whether to only conduct rate correction using the outgroup at root as outgroup, default False.
+   :type onlyrootout: boolean flag
+   :param minseglen: The minimum length of segments to include in ratio if <= 1, default "100000".
+   :type minseglen: float
+   :param keepredun: Whether to keep redundant multiplicons, default False.
+   :type keepredun: boolean flag
+   :param extraparanomeks: The extra paranome ks data to be plotted in the mixed *K*\ :sub:`S` distribution, default None.
+   :type extraparanomeks: path or None
+   :param plotapgmm: Whether to plot mixture modeling of anchor *K*\ :sub:`S` in the mixed *K*\ :sub:`S` distribution, default False.
+   :type plotapgmm: boolean flag
+   :param plotelmm: Whether to plot elmm mixture modeling of paranome *K*\ :sub:`S` in the mixed *K*\ :sub:`S` distribution, default False.
+   :type plotelmm: boolean flag
+   :param components: The range of the number of components to fit in anchor *K*\ :sub:`S` mixture modeling, default (1,4).
+   :type components: (int,int) 
 
