@@ -72,6 +72,10 @@ If we have already the orthogroup file, to assign additional genome or transcrip
 
 The "old_seq" is the sequence file involved in the existed orthogroup while the "new_seq" is the additional sequence file to be assigned. The option ``seq2assign`` can be called multiple times.
 
+.. note::
+
+   The version of hmmer we tested with is 3.1b2. The version of numpy we tested with is 1.19.0. Higher or lower version of these dependent packages might interrupt the proper processing of this function (other functions as well). Please consider modifying the version of certain packages when met with errors.
+
 .. py:function:: cli.dmd(sequences, outdir, tmpdir, cscore, inflation, eval, to_stop, cds, focus, anchorpoints, keepfasta, keepduplicates, globalmrbh, nthreads, orthoinfer, onlyortho, getnsog, tree_method, treeset, msogcut, geneassign, assign_method, seq2assign, fam2assign, concat, segments, listelements, collinearcoalescence, testsog, bins, buscosog, buscohmm, buscocutoff, genetable, normalizedpercent, nonormalization)
 
    Whole paranome inference
