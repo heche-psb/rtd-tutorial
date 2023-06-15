@@ -27,7 +27,7 @@ Another recommended way is to install from the source. The example code is below
    $ cd wgd
    $ virtualenv -p=python3 ENV (or python3 -m venv ENV)
    $ source ENV/bin/activate
-   (ENV) $ python setup.py install
+   (ENV) $ python setup.py install (or python -m pip install -r requirements.txt)
    (ENV) $ pip install .
 
 .. note::

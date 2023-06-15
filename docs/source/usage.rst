@@ -59,6 +59,19 @@ Traditional phylogenetic inference relys on the sequence-based orthologues. The 
 
 We rely on the software ASTRAL to summarize the speceis tree based on the gene tree inferred per collinear orthologue group. At least 80% percent species is required to be present in the multiplicon and the intersected anchor points across all levels (the levels on the same scaffold are treated the same as on different scaffolds) are retreived as different collinear orthologue group (in the label for instance, Multiplicon1_Ap1, Multiplicon1_Ap2). The species occurance ratio can be controled by the parameter ``msogcut``. The gene tree inference method and parameter can be controlled by the parameter ``tree_method`` and ``treeset``.
 
+.. _orthogroupassign:
+
+Orthogroup assignment
+------------
+
+If we have already the orthogroup file, to assign additional genome or transcriptome sequences into the existed orthogroup, we can use the command below.
+
+.. code-block:: console
+
+   (ENV) $ wgd dmd old_seq1 old_seq2 old_seq3 --geneassign --seq2assign new_seq1 --seq2assign new_seq2 --fam2assign families.tsv
+
+The "old_seq" is the sequence file involved in the existed orthogroup while the "new_seq" is the additional sequence file to be assigned. The option ``seq2assign`` can be called multiple times.
+
 .. py:function:: cli.dmd(sequences, outdir, tmpdir, cscore, inflation, eval, to_stop, cds, focus, anchorpoints, keepfasta, keepduplicates, globalmrbh, nthreads, orthoinfer, onlyortho, getnsog, tree_method, treeset, msogcut, geneassign, assign_method, seq2assign, fam2assign, concat, segments, listelements, collinearcoalescence, testsog, bins, buscosog, buscohmm, buscocutoff, genetable, normalizedpercent, nonormalization)
 
    Whole paranome inference
