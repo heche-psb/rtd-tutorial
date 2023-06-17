@@ -50,13 +50,17 @@ Besides, the dupStack plot shows more intuitively the distribution of duplicated
 
 .. image:: Aquilegia_coerulea_Aquilegia_coerulea_multiplicons_level.svg
 
-The dotplot in oxford grid in the unit of nucleotides will also be automately produced.
+The dotplot in oxford grid in the unit of nucleotides and genes will also be automately produced with *K*\ :sub:`S` annotated.
+
+.. image:: Aquilegia_coerulea-vs-Aquilegia_coerulea_Ks.dot.png
+
+.. image:: Aquilegia_coerulea-vs-Aquilegia_coerulea_Ks.dot_unit_gene.png
+
+The ones above are with *K*\ :sub:`S` annotation, the ones without *K*\ :sub:`S` annotation are as below.
 
 .. image:: Aquilegia_coerulea-vs-Aquilegia_coerulea.dot.png
 
-Another dotplot in the unit of genes colored by the median *K*\ :sub:`S` age of anchor pairs on segment is also there.
-
-.. image:: Aquilegia_coerulea.tsv.dotplot.ks.svg
+.. image:: Aquilegia_coerulea-vs-Aquilegia_coerulea.dot_unit_gene.png
 
 .. _mixturerecipe:
 
