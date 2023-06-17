@@ -284,7 +284,7 @@ Synteny is frequently called nowadays in profiling the evolution of psedochromos
 
 The influential parameters for synteny inference include the ``minlen`` controling the minimum length of a scaffold to be considered, the ``maxsize`` controling the maximum family size to be considered, the ``minseglen`` determining the minimum length of segments to considered and the ``keepredun`` determining whether to keep redundant multiplicons.
 
-.. py:function:: cli.syn(families, gff_files, ks_distribution, outdir, feature, attribute, minlen, maxsize, ks_range, iadhore_options, ancestor, minseglen, keepredun)
+.. py:function:: cli.syn(families, gff_files, ks_distribution, outdir, feature, attribute, minlen, maxsize, ks_range, iadhore_options, ancestor, minseglen, keepredun, mingenenum)
 
    Synteny inference
 
@@ -314,6 +314,8 @@ The influential parameters for synteny inference include the ``minlen`` controli
    :type minseglen: float
    :param keepredun: Whether to keep redundant multiplicons, default False.
    :type keepredun: boolean flags
+   :param mingenenum: The minimum number of genes for a segment to be considered, default 30.
+   :type mingenenum: int
 
 .. _searchanchor:
 
@@ -548,11 +550,11 @@ The synteny plot produced by the program ``wgd syn`` can be reproduced by ``wgd 
 
 .. code-block:: console
 
-   (ENV) $ wgd viz --anchorpoints apdata --segments smdata --multiplicon mtdata --genetable gtdata
+   (ENV) $ wgd viz --anchorpoints apdata --segments smdata --multiplicon mtdata --genetable gtdata --plotsyn (--datafile ksdata)
 
 The influential parameters include the ``minlen`` controling the minimum length of a scaffold to be included in dotplot, the ``maxsize`` determining the maximum family size to include, the ``minseglen`` determining the minimum length of segments to include, the ``keepredun`` controling whether to keep redundant multiplicons.
 
-.. py:function:: cli.viz(datafile,spair,outdir,gsmap,plotkde,reweight,em_iterations,em_initializations,prominence_cutoff,segments,minlen,maxsize,anchorpoints,multiplicon,genetable,rel_height,speciestree,onlyrootout,minseglen,keepredun,extraparanomeks,plotapgmm,plotelmm,components)
+.. py:function:: cli.viz(datafile,spair,outdir,gsmap,plotkde,reweight,em_iterations,em_initializations,prominence_cutoff,segments,minlen,maxsize,anchorpoints,multiplicon,genetable,rel_height,speciestree,onlyrootout,minseglen,keepredun,extraparanomeks,plotapgmm,plotelmm,components,mingenenum,plotsyn)
 
    *K*\ :sub:`S` distribution visualization
    Synteny visualization
@@ -604,5 +606,9 @@ The influential parameters include the ``minlen`` controling the minimum length 
    :param plotelmm: Whether to plot elmm mixture modeling of paranome *K*\ :sub:`S` in the mixed *K*\ :sub:`S` distribution, default False.
    :type plotelmm: boolean flag
    :param components: The range of the number of components to fit in anchor *K*\ :sub:`S` mixture modeling, default (1,4).
-   :type components: (int,int) 
+   :type components: (int,int)
+   :param mingenenum: The minimum number of genes for a segment to be considered, default 30.
+   :type mingenenum: int
+   :param plotsyn: Whether to initiate the synteny plot.
+   :type plotsyn: boolean flag
 
