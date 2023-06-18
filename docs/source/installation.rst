@@ -12,7 +12,7 @@ We have posted ``wgd v2`` on `PYPI <https://pypi.org/project/wgd/>`_ so the easi
 
    $ pip install wgd
 
-The version can be specified by replaceing "wgd" with, for instance "wgd==2.0.16".
+The version can be specified by replaceing "wgd" with, for instance "wgd==2.0.19".
 
 .. _source:
 

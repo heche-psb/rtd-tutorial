@@ -62,6 +62,10 @@ The ones above are with *K*\ :sub:`S` annotation, the ones without *K*\ :sub:`S`
 
 .. image:: Aquilegia_coerulea-vs-Aquilegia_coerulea.dot_unit_gene.png
 
+.. note::
+
+   The opacity of anchor dots and all homolog dots can be set by the option ``apalpha`` and ``hoalpha`` separately. If one just wants to see the anchor dots, setting the `hoalpha` as 0 (or other minuscule values) will do. If one wants to see the distribution of whole dots better, setting the `hoalpha` higher (and `apalpha` lower) will do. The ``dotsize`` option can be called to adjust the size of dots.
+
 .. _mixturerecipe:
 
 Mixture modeling
