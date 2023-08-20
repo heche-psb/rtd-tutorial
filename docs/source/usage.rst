@@ -549,6 +549,10 @@ To add rate correction result into the *K*\ :sub:`S` plot, one can use the comma
 
 The additional required file ``gene_species.map`` is automately produced from the ``wgd ksd`` step when producing the ``ks.tsv`` file.
 
+.. note::
+
+   The ``gene_species.map`` file is no longer needed in v2.0.21 onwards. Leave this parameter as default None is enough.
+
 Synteny visualization
 ------------
 
