@@ -186,6 +186,21 @@ To determine the phylogenetic location of a certain WGD, a rate-corrected *K*\ :
 
 This step is mainly affected by the parameter ``reweight`` determining whether to recalculate the weight per species pair instead of using the weight calculated from the whole family, and the parameter ``onlyrootout`` determining whether to only conduct rate correction using the outgroup at root as outgroup. The parameter ``extraparanomeks`` enables the addition of extra paralogous *K*\ :sub:`S` data besides the probably existing ones in the original *K*\ :sub:`S` data and when duplicated paralogous gene pairs occur only the ones in extra paralogous *K*\ :sub:`S` data will be kept. This is to deal with the condition that users might provide gene families containing paralogous gene pairs which might not be complete and thus add more which might overlap with the extra paralogous *K*\ :sub:`S` data. But it's suggested to separate the paralogous *K*\ :sub:`S` only in the ``extraparanomeks`` parameter while the gene families only contain orthologous gene pairs (for instance, the global MRBHs) because the elmm modeling only considers the paralogs transmitted from the ``extraparanomeks`` parameter. Nonetheless, the ``extraparanomeks`` parameter would not affect the result of rate correction which only involves orthologous *K*\ :sub:`S`. We will discuss about it further in the recipe.
 
+.. _kstree:
+
+*K*\ :sub:`S` tree inference
+------------
+
+The *K*\ :sub:`S` tree is good way of visualizing and quantifying the variation of substitution rate. Here in ``wgd v2`` we implemented an additional way of estimating *K*\ :sub:`S` branch length given a species tree or inferred gene tree in ``wgd ksd``. The command is as below.
+
+.. code-block:: console
+
+   (ENV) $ wgd ksd kstree_data/fam.tsv data/kstree_data/Acorus_tatarinowii kstree_data/Amborella_trichopoda kstree_data/Aquilegia_coerulea kstree_data/Aristolochia_fimbriata kstree_data/Cycas_panzhihuaensi --kstree --speciestree kstree_data/species_tree1.nw --onlyconcatkstree -o wgd_kstree_topology1
+
+The option ``kstree`` tells the program to infer *K*\ :sub:`S` tree instead of pairwise *K*\ :sub:`S`. The option ``speciestree`` takes the input species tree. The option ``onlyconcatkstree`` tells the program to only conduct the *K*\ :sub:`S` analysis for the concatenated alignment rather than for every alignment per family. We used two global MRBH families for the illustration above. Three alternative topologies were applied given the uncertain phylogenetic relationship within angiosperms.
+
+.. image:: kstree_results/kstree.svg
+
 .. py:function:: cli.ksd(families, sequences, outdir, tmpdir, nthreads, to_stop, cds, pairwise, strip_gaps, tree_method,spair, speciestree, reweight, onlyrootout, extraparanomeks, anchorpoints, plotkde, plotapgmm, components)
 
    *K*\ :sub:`S` distribution construction
